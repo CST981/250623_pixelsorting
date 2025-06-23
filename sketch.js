@@ -1,8 +1,11 @@
+// Pixel-Sorting mit deutlich sichtbaren Rasterbändern, selektiven Feldern
 let img;
 
-let gridCols = 5;
-let gridRows = 5;
-let maxSortLength = 80;
+let gridCols = 20;
+let gridRows = 20;
+let maxSortLength = 85;
+let numSelectedCells = 31; // Anzahl Rasterzellen, die sortiert werden
+let selectedCells = [];
 
 function preload() {
   img = loadImage('assets/cherry_1.jpeg'); // <--- Pfad anpassen!
@@ -16,44 +19,47 @@ function setup() {
   let cellW = floor(width / gridCols);
   let cellH = floor(height / gridRows);
 
-  // Horizontal-Bänder → Linien von linker Kante jeder Zelle
+  // Rasterzellen sammeln und zufällig auswählen
+  let allCells = [];
   for (let row = 0; row < gridRows; row++) {
-    let y0 = row * cellH;
+    for (let col = 0; col < gridCols; col++) {
+      allCells.push({ row, col });
+    }
+  }
+  shuffle(allCells, true);
+  selectedCells = allCells.slice(0, numSelectedCells);
+
+  for (let cell of selectedCells) {
+    let x0 = cell.col * cellW;
+    let y0 = cell.row * cellH;
+
+    // horizontal: linke Zellkante
     for (let i = 0; i < cellH; i++) {
       let y = y0 + i;
       if (y < height) {
-        sortHorizontalLine(y, 0, width);
+        sortHorizontalLine(y, x0, width);
       }
     }
-  }
 
-  // Vertikal-Bänder → Linien von oberer Kante jeder Zelle
-  for (let col = 0; col < gridCols; col++) {
-    let x0 = col * cellW;
+    // vertikal: obere Zellkante
     for (let i = 0; i < cellW; i++) {
       let x = x0 + i;
       if (x < width) {
-        sortVerticalLine(x, 0, height);
+        sortVerticalLine(x, y0, height);
       }
     }
-  }
 
-  // Diagonal-Bänder → von oberen und linken Zellkanten
-  for (let row = 0; row < gridRows; row++) {
-    let y0 = row * cellH;
+    // diagonal von linker & oberer Zellkante
     for (let i = 0; i < cellW; i++) {
-      let x = i;
+      let x = x0 + i;
       let y = y0;
       if (x < width && y < height) {
         sortDiagonalLine(x, y);
       }
     }
-  }
-  for (let col = 0; col < gridCols; col++) {
-    let x0 = col * cellW;
-    for (let i = 1; i < cellH; i++) { // i = 1 → vermeidet Duplikate an (0,0)
+    for (let i = 1; i < cellH; i++) {
       let x = x0;
-      let y = i;
+      let y = y0 + i;
       if (x < width && y < height) {
         sortDiagonalLine(x, y);
       }
