@@ -4,11 +4,11 @@ let img;
 let gridCols = 20;
 let gridRows = 20;
 let maxSortLength = 85;
-let numSelectedCells = 31; // Anzahl Rasterzellen, die sortiert werden
+let numSelectedCells = 7; // Anzahl Rasterzellen, die sortiert werden
 let selectedCells = [];
 
 function preload() {
-  img = loadImage('assets/cherry_1.jpeg'); // <--- Pfad anpassen!
+  img = loadImage('assets/wolke_10.jpeg'); // <--- Pfad anpassen!
 }
 
 function setup() {
