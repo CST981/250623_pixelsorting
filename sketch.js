@@ -1,14 +1,14 @@
 // Pixel-Sorting mit deutlich sichtbaren Rasterbändern, selektiven Feldern
 let img;
 
-let gridCols = 20;
-let gridRows = 20;
-let maxSortLength = 85;
-let numSelectedCells = 7; // Anzahl Rasterzellen, die sortiert werden
+let gridCols = 5;
+let gridRows = 5;
+let maxSortLength = 190;
+let numSelectedCells = 11; // Anzahl Rasterzellen, die sortiert werden
 let selectedCells = [];
 
 function preload() {
-  img = loadImage('assets/wolke_10.jpeg'); // <--- Pfad anpassen!
+  img = loadImage('assets/asset_image_7.jpeg'); // <--- Pfad anpassen!
 }
 
 function setup() {
