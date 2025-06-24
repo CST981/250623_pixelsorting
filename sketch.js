@@ -1,10 +1,10 @@
 // Pixel-Sorting mit deutlich sichtbaren Rasterbändern, selektiven Feldern
 let img;
 
-let gridCols = 5;
-let gridRows = 5;
+let gridCols = 10;
+let gridRows = 10;
 let maxSortLength = 190;
-let numSelectedCells = 11; // Anzahl Rasterzellen, die sortiert werden
+let numSelectedCells = 47; // Anzahl Rasterzellen, die sortiert werden
 let selectedCells = [];
 
 function preload() {
